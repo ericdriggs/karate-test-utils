@@ -1,0 +1,30 @@
+= karate-test-util
+:table-caption!:
+:toc: macro
+
+toc::[]
+
+utilities for karate dsl testing
+includes java methods and karate functions
+
+== version
+
+```
+<groupId>io.github.ericdriggs</groupId>
+<artifactId>karate-test-utils</artifactId>
+<version>0.0.1-SNAPSHOT</version>
+```
+
+== karate coverage report
+
+=== purpose
+Generates a coverage report based on karate.log and openapi swagger json spec
+
+=== Usage
+
+//Strings
+  KarateOpenApiCoverageReport karateOpenApiCoverageReport = KarateOpenApiCoverageGenerator.
+                generatekarateOpenApiCoverageReportFromStrings(swaggerString, karateLogString, Collections.EMPTY_SET, BigDecimal.ZERO);
+
+
+
