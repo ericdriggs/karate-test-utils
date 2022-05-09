@@ -18,13 +18,26 @@ includes java methods and karate functions
 == karate coverage report
 
 === purpose
-Generates a coverage report based on karate.log and openapi swagger json spec
+Generates a coverage report based in json format n karate.log and openapi swagger json spec
+report: karate-coverage.json
 
-=== Usage
+=== Usage with OpenApi Url
 
-//Strings
-  KarateOpenApiCoverageReport karateOpenApiCoverageReport = KarateOpenApiCoverageGenerator.
-                generatekarateOpenApiCoverageReportFromStrings(swaggerString, karateLogString, Collections.EMPTY_SET, BigDecimal.ZERO);
+```
+KarateOpenApiCoverageGenerator karateOpenApiCoverageGenerator = new KarateOpenApiCoverageGenerator()
+  .setOpenApiJsonUrl("https://user:pass@bar.foo.com/v2/api-docs")
+  .setOpenApiJsonUserPass(Collections.singletonMap("username1","password1"))
+  .setKarateLogPath("src/test/resources/coverage/foo.log")
+  .setSkipPathRegexes(Arrays.asList(".*actuator.*", ".*internal.*", ".*health_check.*"));
 
+KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageGenerator.generateAndSave();
+```
 
+=== Usage with OpenApi as local resource (prefer url to this)
+```
+KarateOpenApiCoverageGenerator karateOpenApiCoverageGenerator = new KarateOpenApiCoverageGenerator()
+  .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger.json")
+  .setKarateLogPath("src/test/resources/coverage/user.log");
 
+KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageGenerator.generateAndSave();
+```

@@ -72,7 +72,7 @@ public class KarateOpenApiCoverageGenerator {
     }
 
 
-    protected static KarateOpenApiCoverageReport generatekarateOpenApiCoverageReportFromStrings(
+    protected static KarateOpenApiCoverageReport generateKarateOpenApiCoverageReportFromStrings(
             String swaggerJson,
             String karateLog,
             Collection<String> skipPathRegexes,
@@ -171,7 +171,7 @@ public class KarateOpenApiCoverageGenerator {
         } else {
             openApiJson = OpenApiJsonUtil.fromOpenApiJsonUrl(openApiJsonUrl, openApiJsonUserPass);
         }
-        return generatekarateOpenApiCoverageReportFromStrings(openApiJson, karateLog, skipPathRegexes, expectedCoveragePercentage);
+        return generateKarateOpenApiCoverageReportFromStrings(openApiJson, karateLog, skipPathRegexes, expectedCoveragePercentage);
     }
 
     public static boolean isEmpty(String val) {

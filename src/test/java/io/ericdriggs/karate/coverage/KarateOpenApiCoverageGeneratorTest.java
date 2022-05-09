@@ -17,17 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
 public class KarateOpenApiCoverageGeneratorTest extends KarateOpenApiCoverageGenerator {
 
     @Test
-    public void generateKarateCoverageReportTest() {
+    public void generateKarateCoverageReportPathTest() {
 
-        String karateLog = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user.log");
-        String swaggerJson = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user-swagger.json");
-        assertNotNull(karateLog);
-        assertNotNull(swaggerJson);
-        assertTrue(karateLog.length() > 0);
-        assertTrue(swaggerJson.length() > 0);
+        KarateOpenApiCoverageGenerator karateOpenApiCoverageGenerator = new KarateOpenApiCoverageGenerator()
+                .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger.json")
+                .setKarateLogPath("src/test/resources/coverage/user.log");
 
-        KarateOpenApiCoverageReport karateOpenApiCoverageReport = KarateOpenApiCoverageGenerator.
-                generatekarateOpenApiCoverageReportFromStrings(swaggerJson, karateLog, Collections.EMPTY_SET, BigDecimal.ZERO);
+        KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageGenerator.generateAndSave();
         assertNotNull(karateOpenApiCoverageReport.getActualCoveragePercentage());
         assertTrue(karateOpenApiCoverageReport.getActualCoveragePercentage().compareTo(BigDecimal.ZERO) > 0);
         assertNotNull(karateOpenApiCoverageReport.getCoveredPaths());
@@ -37,6 +33,31 @@ public class KarateOpenApiCoverageGeneratorTest extends KarateOpenApiCoverageGen
         System.out.println(karateOpenApiCoverageReport.toJson());
 
     }
+
+
+    @Test
+    public void generateKarateCoverageReportStringTest() {
+
+        String karateLog = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user.log");
+        String swaggerJson = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user-swagger.json");
+        assertNotNull(karateLog);
+        assertNotNull(swaggerJson);
+        assertTrue(karateLog.length() > 0);
+        assertTrue(swaggerJson.length() > 0);
+
+        KarateOpenApiCoverageReport karateOpenApiCoverageReport = KarateOpenApiCoverageGenerator.
+                generateKarateOpenApiCoverageReportFromStrings(swaggerJson, karateLog, Collections.EMPTY_SET, BigDecimal.ZERO);
+        assertNotNull(karateOpenApiCoverageReport.getActualCoveragePercentage());
+        assertTrue(karateOpenApiCoverageReport.getActualCoveragePercentage().compareTo(BigDecimal.ZERO) > 0);
+        assertNotNull(karateOpenApiCoverageReport.getCoveredPaths());
+        assertNotNull(karateOpenApiCoverageReport.getUncoveredPaths());
+        assertNotNull(karateOpenApiCoverageReport.getUnmatchedLogMethodUrls());
+
+        System.out.println(karateOpenApiCoverageReport.toJson());
+
+    }
+
+
 
   
     @Test
