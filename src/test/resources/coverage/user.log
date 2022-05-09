@@ -1,0 +1,10 @@
+ 1 > GET http://foo.com/
+ 1 > GET http://foo.com/email/1234
+ 1 > PUT http://foo.com/email/2345
+ 1 > PUT http://foo.com/user/2345
+ 1 > GET http://foo.com/health_check
+ 1 > GET http://foo.com/subscription/35466
+ 1 > GET http://foo.com/subscription/35466
+ 1 > GET http://foo.com/subscription/123
+ 1 > GET http://foo.com/do_you_want_to_build_a_snowman?answer=yes
+ dummy line

@@ -1,0 +1,16 @@
+= karate-test-util
+:table-caption!:
+:toc: macro
+
+toc::[]
+
+utilities for karate dsl testing
+includes java methods and karate functions
+
+
+== karate coverage report
+
+Example Usage:
+
+  KarateOpenApiCoverageReport karateOpenApiCoverageReport = KarateOpenApiCoverageGenerator.
+                generatekarateOpenApiCoverageReportFromStrings(swaggerString, karateLogString, Collections.EMPTY_SET, BigDecimal.ZERO);
