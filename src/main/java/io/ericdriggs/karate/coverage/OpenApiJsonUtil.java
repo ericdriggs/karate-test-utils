@@ -60,15 +60,33 @@ public class OpenApiJsonUtil {
     protected static Set<HttpMethodPath> fromJsonNode(JsonNode jsonNode) {
         Set<HttpMethodPath> httpMethodPaths = new TreeSet<>(HttpMethodPath.CASE_INSENSITIVE_ORDER);
 
+
         JsonNode pathsNode = jsonNode.get("paths");
         if (pathsNode == null) {
             throw new IllegalStateException("Response json is missing key: 'paths':" + jsonNode.toPrettyString());
         }
 
+        /* TODO: also support open api 3.0 servers as replacement for base path
+         see: https://github.com/ericdriggs/karate-test-utils/issues/4
+         reference: https://swagger.io/docs/specification/api-host-and-base-path/
+         */
+        final String basePathString;
+        {
+            JsonNode basePath = jsonNode.get("basePath");
+            if (basePath == null) {
+                basePathString = "";
+
+            } else {
+                basePathString = basePath.asText();
+            }
+        }
+
+
+
         Iterator<Map.Entry<String, JsonNode>> pathIterator = pathsNode.fields();
         while (pathIterator.hasNext()) {
             Map.Entry<String, JsonNode> pathNode = pathIterator.next();
-            String path = pathNode.getKey();
+            String path = basePathString + pathNode.getKey();
             JsonNode methodsNode = pathNode.getValue();
 
             Iterator<Map.Entry<String, JsonNode>> methodIterator = methodsNode.fields();

@@ -18,7 +18,7 @@ public class OpenApiJsonUtilTest extends OpenApiJsonUtil {
     @Disabled //integration test
     @Test
     public void parseOpenApiJsonFromUrl() {
-        String swaggerJsonPathFilePath = "http://foo.com/api/json";
+        String swaggerJsonPathFilePath = "http://foo.com/v1/pi/json";
         String openApiJson = OpenApiJsonUtil.fromOpenApiJsonUrl(swaggerJsonPathFilePath, Collections.singletonMap("user","pass"));
         Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson);
         assertNotNull(httpMethodPaths);
