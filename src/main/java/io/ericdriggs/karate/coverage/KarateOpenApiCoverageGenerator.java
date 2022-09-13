@@ -45,9 +45,15 @@ public class KarateOpenApiCoverageGenerator {
     private Collection<String> skipPathRegexes = Collections.emptySet();
 
     /**
-     *
+     * Expected coverage. If coverage is below will throw.
      */
     private BigDecimal expectedCoveragePercentage = BigDecimal.ZERO;
+
+    /**
+     * Only needed for OAS3 since servers conjoins host and base path
+     * @see: https://swagger.io/docs/specification/api-host-and-base-path/
+     */
+    private String basePath = "";
 
     public KarateOpenApiCoverageGenerator() {
 
@@ -75,12 +81,13 @@ public class KarateOpenApiCoverageGenerator {
     protected static KarateOpenApiCoverageReport generateKarateOpenApiCoverageReportFromStrings(
             String swaggerJson,
             String karateLog,
+            String basePath,
             Collection<String> skipPathRegexes,
             BigDecimal expectedCoveragePercentage) {
 
 
         /***  Initialize report collections ****/
-        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(swaggerJson);
+        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(swaggerJson, basePath);
         Map<LogMethodUrl, Integer> karateLogPathMap = KarateLogUtil.fromKarateLog(karateLog);
 
         Set<HttpMethodPath> skippedHttpMethodPaths = HttpMethodPath.filterMatched(httpMethodPaths, skipPathRegexes);
@@ -171,7 +178,7 @@ public class KarateOpenApiCoverageGenerator {
         } else {
             openApiJson = OpenApiJsonUtil.fromOpenApiJsonUrl(openApiJsonUrl, openApiJsonUserPass);
         }
-        return generateKarateOpenApiCoverageReportFromStrings(openApiJson, karateLog, skipPathRegexes, expectedCoveragePercentage);
+        return generateKarateOpenApiCoverageReportFromStrings(openApiJson, karateLog,  basePath, skipPathRegexes, expectedCoveragePercentage);
     }
 
     public static boolean isEmpty(String val) {

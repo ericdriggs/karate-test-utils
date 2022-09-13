@@ -1,0 +1,704 @@
+{
+  "swagger": "2.0",
+  "info":
+  {
+    "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
+    "termsOfService": "urn:tos",
+    "contact":
+    {},
+    "license":
+    {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+
+  "tags":
+  [
+    {
+      "name": "donki-health-controller",
+      "description": "Donki Health Controller"
+    },
+    {
+      "name": "root-controller",
+      "description": "Root Controller"
+    },
+    {
+      "name": "main-controller",
+      "description": "Main Controller"
+    }
+  ],
+  "host": "foo.com",
+  "basePath": "/v1",
+  "paths":
+  {
+    "/":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "root-controller"
+        ],
+        "summary": "getRootHtml",
+        "operationId": "getRootHtmlUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "text/html"
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "OK",
+            "schema":
+            {
+              "type": "string"
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/email/{email}":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Returns user by email id",
+        "operationId": "emailGetUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "Returns user from email id",
+            "schema":
+            {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "User not found"
+          }
+        }
+      },
+      "put":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Adds or updates User details using user email id",
+        "operationId": "emailPutUsingPUT",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "datetime",
+            "in": "query",
+            "description": "datetime",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastModified",
+            "in": "header",
+            "description": "used only for testing only. format: yyyy-MM-dd.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "User is successfully added or updated ",
+            "schema":
+            {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "201":
+          {
+            "description": "Created"
+          },
+          "400":
+          {
+            "description": "unrecognised fields"
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Deletes user by email id",
+        "operationId": "emailDeleteUsingDELETE",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "User Deleted successfully ",
+            "schema":
+            {
+              "type": "string"
+            }
+          },
+          "204":
+          {
+            "description": "No Content"
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/health_check":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "donki-health-controller"
+        ],
+        "summary": "check",
+        "operationId": "checkUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "*/*"
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "OK",
+            "schema":
+            {
+              "type": "string"
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/subscription/{subscriptionId}":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Returns user by subscription id",
+        "operationId": "subscriptionGetUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "subscriptionId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "returns user on subscription id",
+            "schema":
+            {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/user/all":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "list all the users",
+        "operationId": "getAllUsersUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "Returns all users",
+            "schema":
+            {
+              "type": "array",
+              "items":
+              {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/user/expired":
+    {
+      "delete":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Deletes users who have not been modified in > 31 days",
+        "operationId": "deleteExpiredUsersUsingDELETE",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "*/*"
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "expired users deleted",
+            "schema":
+            {
+              "type": "object"
+            }
+          },
+          "204":
+          {
+            "description": "No Content"
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/user/{userId}":
+    {
+      "get":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Returns user by user id",
+        "operationId": "userGetUsingGET",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "returns user on user id",
+            "schema":
+            {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "User not found"
+          }
+        }
+      },
+      "put":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Adds or updates User details using user id",
+        "operationId": "userPutUsingPUT",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "application/json",
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subscriberId",
+            "in": "query",
+            "description": "subscriberId",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "query",
+            "description": "subscriptionId",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "datetime",
+            "in": "query",
+            "description": "datetime",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lastModified",
+            "in": "header",
+            "description": "used only for testing only. format: yyyy-MM-dd.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "User is successfully added or updated same amount.",
+            "schema":
+            {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "201":
+          {
+            "description": "Created"
+          },
+          "400":
+          {
+            "description": "unrecognised fields"
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "Not Found"
+          },
+          "409":
+          {
+            "description": "subscriberId/subscriptionId/email already associated with another userId "
+          }
+        }
+      },
+      "delete":
+      {
+        "tags":
+        [
+          "main-controller"
+        ],
+        "summary": "Deletes user by User id",
+        "operationId": "userDeleteUsingDELETE",
+        "consumes":
+        [
+          "application/json"
+        ],
+        "produces":
+        [
+          "*/*"
+        ],
+        "parameters":
+        [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses":
+        {
+          "200":
+          {
+            "description": "User Deleted successfully ",
+            "schema":
+            {
+              "type": "string"
+            }
+          },
+          "204":
+          {
+            "description": "No Content"
+          },
+          "401":
+          {
+            "description": "Unauthorized"
+          },
+          "403":
+          {
+            "description": "Forbidden"
+          },
+          "404":
+          {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions":
+  {
+    "Iterable«User»":
+    {
+      "type": "object"
+    },
+    "User":
+    {
+      "type": "object",
+      "properties":
+      {
+        "datetime":
+        {
+          "type": "string"
+        },
+        "email":
+        {
+          "type": "string"
+        },
+        "lastModified":
+        {
+          "type": "string",
+          "format": "date"
+        },
+        "subscriberId":
+        {
+          "type": "integer",
+          "format": "int64"
+        },
+        "subscriptionId":
+        {
+          "type": "integer",
+          "format": "int64"
+        },
+        "userId":
+        {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

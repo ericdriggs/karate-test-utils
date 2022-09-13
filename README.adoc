@@ -36,7 +36,7 @@ KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageG
 === Usage with OpenApi as local resource (prefer url to this)
 ```
 KarateOpenApiCoverageGenerator karateOpenApiCoverageGenerator = new KarateOpenApiCoverageGenerator()
-  .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger.json")
+  .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger2.json")
   .setKarateLogPath("src/test/resources/coverage/user.log");
 
 KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageGenerator.generateAndSave();

@@ -9,7 +9,7 @@ import java.nio.file.Path;
 public class SimpleFileReader {
 
     /**
-     * @param relativePath a path relative to project root, e.g. src/test/resources/coverage/user-swagger.json
+     * @param relativePath a path relative to project root, e.g. src/test/resources/coverage/user-swagger2.json
      * @return the contents of the file
      * @throws RuntimeException if unable to load file
      */

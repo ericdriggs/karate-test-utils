@@ -1,22 +1,21 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "Api Documentation",
     "description": "Api Documentation",
+    "version": "1.0",
+    "title": "Api Documentation",
     "termsOfService": "urn:tos",
     "contact": {},
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
-    },
-    "version": "1.0"
-  },
-  "servers": [
-    {
-      "url": "//foo.com/"
     }
-  ],
+  },
   "tags": [
+    {
+      "name": "donki-health-controller",
+      "description": "Donki Health Controller"
+    },
     {
       "name": "root-controller",
       "description": "Root Controller"
@@ -26,7 +25,6 @@
       "description": "Main Controller"
     }
   ],
-  "basePath": "/v1",
   "paths": {
     "/": {
       "get": {
@@ -47,16 +45,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not Found"
           }
         }
       }
@@ -96,16 +91,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "User not found",
-            "content": {}
+            "description": "User not found"
           }
         }
       },
@@ -138,6 +130,7 @@
             "name": "lastModified",
             "in": "header",
             "description": "used only for testing only. format: yyyy-MM-dd.",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -160,24 +153,19 @@
             }
           },
           "201": {
-            "description": "Created",
-            "content": {}
+            "description": "Created"
           },
           "400": {
-            "description": "unrecognised fields",
-            "content": {}
+            "description": "unrecognised fields"
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not Found"
           }
         }
       },
@@ -210,27 +198,25 @@
             }
           },
           "204": {
-            "description": "No Content",
-            "content": {}
+            "description": "No Content"
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "User not found",
-            "content": {}
+            "description": "User not found"
           }
         }
       }
     },
     "/health_check": {
       "get": {
-
+        "tags": [
+          "donki-health-controller"
+        ],
         "summary": "check",
         "operationId": "checkUsingGET",
         "responses": {
@@ -245,16 +231,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not Found"
           }
         }
       }
@@ -295,16 +278,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "User not found",
-            "content": {}
+            "description": "User not found"
           }
         }
       }
@@ -339,16 +319,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not Found"
           }
         }
       }
@@ -372,16 +349,13 @@
             }
           },
           "204": {
-            "description": "No Content",
-            "content": {}
+            "description": "No Content"
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           }
         }
       }
@@ -422,16 +396,13 @@
             }
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "User not found",
-            "content": {}
+            "description": "User not found"
           }
         }
       },
@@ -456,6 +427,7 @@
             "name": "email",
             "in": "query",
             "description": "email",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -464,6 +436,7 @@
             "name": "subscriberId",
             "in": "query",
             "description": "subscriberId",
+            "required": false,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -473,6 +446,7 @@
             "name": "subscriptionId",
             "in": "query",
             "description": "subscriptionId",
+            "required": false,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -491,6 +465,7 @@
             "name": "lastModified",
             "in": "header",
             "description": "used only for testing only. format: yyyy-MM-dd.",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -513,28 +488,22 @@
             }
           },
           "201": {
-            "description": "Created",
-            "content": {}
+            "description": "Created"
           },
           "400": {
-            "description": "unrecognised fields",
-            "content": {}
+            "description": "unrecognised fields"
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Not Found",
-            "content": {}
+            "description": "Not Found"
           },
           "409": {
-            "description": "subscriberId/subscriptionId/email already associated with another userId ",
-            "content": {}
+            "description": "subscriberId/subscriptionId/email already associated with another userId "
           }
         }
       },
@@ -568,30 +537,33 @@
             }
           },
           "204": {
-            "description": "No Content",
-            "content": {}
+            "description": "No Content"
           },
           "401": {
-            "description": "Unauthorized",
-            "content": {}
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden",
-            "content": {}
+            "description": "Forbidden"
           },
           "404": {
-            "description": "User not found",
-            "content": {}
+            "description": "User not found"
           }
         }
       }
     }
   },
+  "servers": [
+    {
+      "url": "https://staging.foo.com/v1",
+      "description":"staging"
+    },
+    {
+      "url": "https://prod.foo.com/v1",
+      "description":"prod"
+    }
+  ],
   "components": {
     "schemas": {
-      "Iterable«User»": {
-        "type": "object"
-      },
       "User": {
         "type": "object",
         "properties": {
@@ -618,6 +590,9 @@
             "format": "int64"
           }
         }
+      },
+      "Iterable_User_": {
+        "type": "object"
       }
     }
   }
