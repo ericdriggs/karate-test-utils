@@ -28,7 +28,7 @@ public class OpenApiJsonUtilTest extends OpenApiJsonUtil {
     @Test
     public void parseOpenApiJsonFromFile() {
 
-        String relativePath = "src/test/resources/coverage/user-swagger.json";
+        String relativePath = "src/test/resources/coverage/user-swagger2.json";
         String openApiJson = OpenApiJsonUtil.fromRelativePath(relativePath);
         Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson);
         assertNotNull(httpMethodPaths);

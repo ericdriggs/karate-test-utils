@@ -20,7 +20,7 @@ public class KarateOpenApiCoverageGeneratorTest extends KarateOpenApiCoverageGen
     public void generateKarateCoverageReportPathTest() {
 
         KarateOpenApiCoverageGenerator karateOpenApiCoverageGenerator = new KarateOpenApiCoverageGenerator()
-                .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger.json")
+                .setOpenApiJsonFilePath("src/test/resources/coverage/user-swagger2.json")
                 .setKarateLogPath("src/test/resources/coverage/user.log");
 
         KarateOpenApiCoverageReport karateOpenApiCoverageReport = karateOpenApiCoverageGenerator.generateAndSave();
@@ -39,7 +39,7 @@ public class KarateOpenApiCoverageGeneratorTest extends KarateOpenApiCoverageGen
     public void generateKarateCoverageReportStringTest() {
 
         String karateLog = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user.log");
-        String swaggerJson = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user-swagger.json");
+        String swaggerJson = SimpleFileReader.fromRelativePath("src/test/resources/coverage/user-swagger2.json");
         assertNotNull(karateLog);
         assertNotNull(swaggerJson);
         assertTrue(karateLog.length() > 0);
