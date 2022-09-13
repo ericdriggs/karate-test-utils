@@ -18,9 +18,9 @@ public class OpenApiJsonUtilTest extends OpenApiJsonUtil {
     @Disabled //integration test
     @Test
     public void parseOpenApiJsonFromUrl() {
-        String swaggerJsonPathFilePath = "http://foo.com/v1/pi/json";
-        String openApiJson = OpenApiJsonUtil.fromOpenApiJsonUrl(swaggerJsonPathFilePath, Collections.singletonMap("user","pass"));
-        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson);
+        final String swaggerJsonPathFilePath = "https://staging.foo.com/v1/api/json";
+        final String openApiJson = OpenApiJsonUtil.fromOpenApiJsonUrl(swaggerJsonPathFilePath, Collections.singletonMap("user","pass"));
+        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson, null);
         assertNotNull(httpMethodPaths);
         assertTrue(httpMethodPaths.size() > 0);
     }
@@ -28,9 +28,9 @@ public class OpenApiJsonUtilTest extends OpenApiJsonUtil {
     @Test
     public void parseOpenApiJsonFromFile() {
 
-        String relativePath = "src/test/resources/coverage/user-swagger2.json";
-        String openApiJson = OpenApiJsonUtil.fromRelativePath(relativePath);
-        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson);
+        final String relativePath = "src/test/resources/coverage/user-swagger2.json";
+        final String openApiJson = OpenApiJsonUtil.fromRelativePath(relativePath);
+        Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson, null);
         assertNotNull(httpMethodPaths);
         assertTrue(httpMethodPaths.size() > 0);
     }

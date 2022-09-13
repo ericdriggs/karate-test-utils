@@ -9,6 +9,7 @@ import io.ericdriggs.http.SimpleHttpClient;
 import io.ericdriggs.karate.coverage.model.HttpMethod;
 import io.ericdriggs.karate.coverage.model.HttpMethodPath;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -23,6 +24,7 @@ import java.util.TreeSet;
  * - only interested in a small section of spec, which barely changed from v2 and v3
  * - minimize external dependencies
  */
+@Slf4j
 public class OpenApiJsonUtil {
     private final static ObjectMapper mapper;
     private static final SimpleHttpClient jsonHttpClient = new SimpleHttpClient();
@@ -50,14 +52,22 @@ public class OpenApiJsonUtil {
     }
 
     @SneakyThrows(JsonProcessingException.class)
-    protected static Set<HttpMethodPath> fromJsonString(String jsonBody) {
+    protected static Set<HttpMethodPath> fromJsonString(String jsonBody, String basePath) {
 
         JsonNode jsonNode = mapper.readTree(jsonBody);
-        return fromJsonNode(jsonNode);
+        return fromJsonNode(jsonNode, basePath);
 
     }
 
-    protected static Set<HttpMethodPath> fromJsonNode(JsonNode jsonNode) {
+
+    /**
+     * for OAS3 requires basePath to be set since no equivalent in OAS3
+     *        reference: https://swagger.io/docs/specification/api-host-and-base-path/
+     * @param jsonNode the parsed openapi spec
+     * @param basePath the base path (if exists and oas3)
+     * @return the set of http method paths to match against (host agnostic)
+     */
+    protected static Set<HttpMethodPath> fromJsonNode(JsonNode jsonNode, String basePath) {
         Set<HttpMethodPath> httpMethodPaths = new TreeSet<>(HttpMethodPath.CASE_INSENSITIVE_ORDER);
 
 
@@ -66,27 +76,21 @@ public class OpenApiJsonUtil {
             throw new IllegalStateException("Response json is missing key: 'paths':" + jsonNode.toPrettyString());
         }
 
-        /* TODO: also support open api 3.0 servers as replacement for base path
-         see: https://github.com/ericdriggs/karate-test-utils/issues/4
-         reference: https://swagger.io/docs/specification/api-host-and-base-path/
-         */
-        final String basePathString;
-        {
-            JsonNode basePath = jsonNode.get("basePath");
-            if (basePath == null) {
-                basePathString = "";
+
+        if (basePath == null || basePath.trim().equals("")) {
+            JsonNode basePathNode = jsonNode.get("basePath");
+            if (basePathNode == null) {
+                basePath = "";
 
             } else {
-                basePathString = basePath.asText();
+                basePath = basePathNode.asText();
             }
         }
-
-
 
         Iterator<Map.Entry<String, JsonNode>> pathIterator = pathsNode.fields();
         while (pathIterator.hasNext()) {
             Map.Entry<String, JsonNode> pathNode = pathIterator.next();
-            String path = basePathString + pathNode.getKey();
+            String path = basePath + pathNode.getKey();
             JsonNode methodsNode = pathNode.getValue();
 
             Iterator<Map.Entry<String, JsonNode>> methodIterator = methodsNode.fields();

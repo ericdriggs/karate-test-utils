@@ -14,8 +14,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "host": "foo.com",
-  "basePath": "/",
+
   "tags":
   [
     {
@@ -31,6 +30,7 @@
       "description": "Main Controller"
     }
   ],
+  "host": "foo.com",
   "basePath": "/v1",
   "paths":
   {
