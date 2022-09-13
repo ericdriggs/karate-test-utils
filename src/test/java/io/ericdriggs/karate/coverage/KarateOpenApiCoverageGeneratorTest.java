@@ -54,11 +54,7 @@ public class KarateOpenApiCoverageGeneratorTest extends KarateOpenApiCoverageGen
         assertNotNull(karateOpenApiCoverageReport.getUnmatchedLogMethodUrls());
 
         System.out.println(karateOpenApiCoverageReport.toJson());
-
     }
-
-
-
   
     @Test
     public void coveragePercentageTest() {

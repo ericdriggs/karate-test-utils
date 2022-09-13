@@ -1,10 +1,11 @@
- 1 > GET http://foo.com/v1/
- 1 > GET http://foo.com/v1/email/1234
- 1 > PUT http://foo.com/v1/email/2345
- 1 > PUT http://foo.com/v1/user/2345
- 1 > GET http://foo.com/v1/health_check
- 1 > GET http://foo.com/v1/subscription/35466
- 1 > GET http://foo.com/v1/subscription/35466
- 1 > GET http://foo.com/v1/subscription/123
- 1 > GET http://foo.com/v1/do_you_want_to_build_a_snowman?answer=yes
+ 1 > GET https://staging.foo.com/v1/
+ 1 > GET https://staging.foo.com/v1/email/1234
+ 1 > PUT https://staging.foo.com/v1/email/2345
+ 1 > PUT https://staging.foo.com/v1/user/2345
+ 1 > GET https://staging.foo.com/v1/health_check
+ 1 > GET https://staging.foo.com/v1/subscription/35466
+ 1 > GET https://staging.foo.com/v1/subscription/35466
+ 1 > GET https://staging.foo.com/v1/subscription/123
+ 1 > GET https://staging.foo.com/v1/do_you_want_to_build_a_snowman?answer=yes
+ 1 > GET https://false-positive.com/v1/users/all
  dummy line

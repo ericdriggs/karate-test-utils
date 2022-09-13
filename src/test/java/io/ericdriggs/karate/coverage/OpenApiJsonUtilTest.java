@@ -33,7 +33,6 @@ public class OpenApiJsonUtilTest extends OpenApiJsonUtil {
         Set<HttpMethodPath> httpMethodPaths = OpenApiJsonUtil.fromJsonString(openApiJson);
         assertNotNull(httpMethodPaths);
         assertTrue(httpMethodPaths.size() > 0);
-
     }
 
 }
